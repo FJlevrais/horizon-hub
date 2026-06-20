@@ -103,7 +103,7 @@ local Themes = {
 	OceanView   = { Background = Color3.fromRGB(10, 18, 22), Sidebar = Color3.fromRGB(14, 28, 36), Card = Color3.fromRGB(18, 40, 52), Accent = Color3.fromRGB(41, 128, 185), Text = Color3.fromRGB(240[...]
 	NeonOrange  = { Background = Color3.fromRGB(16, 14, 12), Sidebar = Color3.fromRGB(26, 21, 16), Card = Color3.fromRGB(38, 29, 20), Accent = Color3.fromRGB(230, 126, 34), Text = Color3.fromRGB(255[...]
 	Midnight    = { Background = Color3.fromRGB(8, 10, 15), Sidebar = Color3.fromRGB(12, 16, 26), Card = Color3.fromRGB(18, 24, 38), Accent = Color3.fromRGB(155, 89, 182), Text = Color3.fromRGB(240,[...]
-	HotPink     = { Background = Color3.fromRGB(18, 10, 15), Sidebar = Color3.fromRGB(30, 14, 24), Card = Color3.fromRGB(42, 16, 33), Accent = Color3.fromRGB(234, 42, 124), Text = Color3.fromRGB(255[...]
+	HotPink     = { Background = Color3.fromRGB(18, 10, 15), Sidebar = Color3.fromRGB(30, 14, 24), Card = Color3.fromRGB(42, 16, 33), Accent = Color3.fromRGB(234, 42, 124), Text = Color3.fromRGB(255,[...]
 	Frostbite   = { Background = Color3.fromRGB(12, 17, 20), Sidebar = Color3.fromRGB(18, 27, 33), Card = Color3.fromRGB(26, 38, 46), Accent = Color3.fromRGB(26, 188, 156), Text = Color3.fromRGB(235[...]
 	RoyalGold   = { Background = Color3.fromRGB(15, 14, 10), Sidebar = Color3.fromRGB(24, 22, 14), Card = Color3.fromRGB(36, 32, 18), Accent = Color3.fromRGB(212, 175, 55), Text = Color3.fromRGB(250[...]
 	DeepPurple  = { Background = Color3.fromRGB(12, 9, 16), Sidebar = Color3.fromRGB(20, 14, 28), Card = Color3.fromRGB(28, 18, 41), Accent = Color3.fromRGB(142, 68, 173), Text = Color3.fromRGB(245,[...]
@@ -227,8 +227,8 @@ Instance.new("UICorner", SearchBox).CornerRadius = UDim.new(0, 10)
 
 local WindowControls = Instance.new("Frame")
 WindowControls.Name = "WindowControls"
-WindowControls.Size = UDim2.new(0, 170, 0, 30)
-WindowControls.Position = UDim2.new(1, -194, 0.5, -15)
+WindowControls.Size = UDim2.new(0, 110, 0, 30)
+WindowControls.Position = UDim2.new(1, -134, 0.5, -15)
 WindowControls.BackgroundTransparency = 1
 WindowControls.Parent = TopBar
 
