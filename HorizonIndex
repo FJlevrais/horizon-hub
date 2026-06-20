@@ -13,6 +13,7 @@ local UserInputService = game:GetService("UserInputService")
 local HttpService = game:GetService("HttpService")
 local LogService = game:GetService("LogService")
 local RunService = game:GetService("RunService")
+local TeleportService = game:GetService("TeleportService")
 local TargetParent = LocalPlayer:WaitForChild("PlayerGui")
 
 local DATABASE_NAMESPACE = "HorizonHub_GlobalViews_v2_"
@@ -83,33 +84,33 @@ end
 -- [INTERNAL STATE / CONFIGURATION STATE]
 -- =============================================================================
 local MyCustomScripts = {
-	{ Id = 1, Name = "Infinite Yield Hub Keyless", Tag = "Universal", Desc = "IY", IsFree = true, Code = [[loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"))()]] },
+	{ Id = 1, Name = "Infinite Yield Hub Keyless", Tag = "Universal", Desc = "IY", IsFree = true, Code = [[loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/sourc[...]
 	{ Id = 2, Name = "Rejoin Server", Tag = "Universal", Desc = "RJ", IsFree = true, Code = [[loadstring(game:HttpGet("https://pastebin.com/raw/WCHaqcPp"))()]] },
-    { Id = 3, Name = "Ultimate Fling GUI", Tag = "Universal", Desc = "UFG", IsFree = true, Code = [[loadstring(game:HttpGet("https://raw.githubusercontent.com/K1LAS1K/Ultimate-Fling-GUI/main/flingscript.lua"))()]] },
+    { Id = 3, Name = "Ultimate Fling GUI", Tag = "Universal", Desc = "UFG", IsFree = true, Code = [[loadstring(game:HttpGet("https://raw.githubusercontent.com/K1LAS1K/Ultimate-Fling-GUI/main/fling[...]
 	{ Id = 4, Name = "MM2 Vertex Hub", Tag = "Games", Desc = "MM2", IsFree = true, Code = [[loadstring(game:HttpGet("https://raw.smokingscripts.org/vertex.lua"))()]] },
-    { Id = 5, Name = "GAG2 Axonic Hub", Tag = "Games", Desc = "GAG2", IsFree = true, Code = [[loadstring(game:HttpGet("https://raw.githubusercontent.com/Kenniel123/Grow-A-Garden-2/refs/heads/main/Grow%20A%20Garden%202"))()]] },
-    { Id = 6, Name = "Lumber Tycoon 2 Kron Hub", Tag = "Games", Desc = "LT2", IsFree = true, Code = [[loadstring(game:HttpGet("https://raw.githubusercontent.com/DevKron/Kron_Hub/refs/heads/main/version_1.0"))()]] },
+    { Id = 5, Name = "GAG2 Axonic Hub", Tag = "Games", Desc = "GAG2", IsFree = true, Code = [[loadstring(game:HttpGet("https://raw.githubusercontent.com/Kenniel123/Grow-A-Garden-2/refs/heads/main/[...]
+    { Id = 6, Name = "Lumber Tycoon 2 Kron Hub", Tag = "Games", Desc = "LT2", IsFree = true, Code = [[loadstring(game:HttpGet("https://raw.githubusercontent.com/DevKron/Kron_Hub/refs/heads/main/ve[...]
 	{ Id = 7, Name = "NONE", Tag = "Legit", Desc = "NONE", IsFree = false, Code = [[print("Smooth aim active")]] },
 	{ Id = 8, Name = "Player ESP", Tag = "Visuals", Desc = "ESP", IsFree = true, Code = [[loadstring(game:HttpGet("https://pastebin.com/raw/uvxU3ANc"))()]] }
 }
 
 local Themes = {
-	DefaultDark = { Background = Color3.fromRGB(14, 15, 14), Sidebar = Color3.fromRGB(20, 22, 20), Card = Color3.fromRGB(22, 24, 25), Accent = Color3.fromRGB(46, 204, 113), Text = Color3.fromRGB(245, 245, 245), MutedText = Color3.fromRGB(140, 145, 140) },
-	Cyberpunk   = { Background = Color3.fromRGB(12, 10, 18), Sidebar = Color3.fromRGB(21, 15, 32), Card = Color3.fromRGB(30, 20, 45), Accent = Color3.fromRGB(241, 196, 15), Text = Color3.fromRGB(255, 255, 255), MutedText = Color3.fromRGB(160, 130, 190) },
-	Retrowave   = { Background = Color3.fromRGB(18, 11, 26), Sidebar = Color3.fromRGB(30, 14, 43), Card = Color3.fromRGB(45, 18, 64), Accent = Color3.fromRGB(255, 0, 127), Text = Color3.fromRGB(250, 250, 250), MutedText = Color3.fromRGB(170, 100, 200) },
-	Vampire     = { Background = Color3.fromRGB(15, 10, 10), Sidebar = Color3.fromRGB(26, 14, 14), Card = Color3.fromRGB(36, 16, 16), Accent = Color3.fromRGB(192, 41, 43), Text = Color3.fromRGB(245, 235, 235), MutedText = Color3.fromRGB(150, 110, 110) },
-	Stealth     = { Background = Color3.fromRGB(10, 10, 11), Sidebar = Color3.fromRGB(16, 16, 18), Card = Color3.fromRGB(24, 24, 27), Accent = Color3.fromRGB(110, 115, 120), Text = Color3.fromRGB(230, 230, 230), MutedText = Color3.fromRGB(100, 100, 105) },
-	OceanView   = { Background = Color3.fromRGB(10, 18, 22), Sidebar = Color3.fromRGB(14, 28, 36), Card = Color3.fromRGB(18, 40, 52), Accent = Color3.fromRGB(41, 128, 185), Text = Color3.fromRGB(240, 250, 255), MutedText = Color3.fromRGB(110, 150, 170) },
-	NeonOrange  = { Background = Color3.fromRGB(16, 14, 12), Sidebar = Color3.fromRGB(26, 21, 16), Card = Color3.fromRGB(38, 29, 20), Accent = Color3.fromRGB(230, 126, 34), Text = Color3.fromRGB(255, 248, 240), MutedText = Color3.fromRGB(160, 140, 120) },
-	Midnight    = { Background = Color3.fromRGB(8, 10, 15), Sidebar = Color3.fromRGB(12, 16, 26), Card = Color3.fromRGB(18, 24, 38), Accent = Color3.fromRGB(155, 89, 182), Text = Color3.fromRGB(240, 242, 250), MutedText = Color3.fromRGB(120, 130, 160) },
-	HotPink     = { Background = Color3.fromRGB(18, 10, 15), Sidebar = Color3.fromRGB(30, 14, 24), Card = Color3.fromRGB(42, 16, 33), Accent = Color3.fromRGB(234, 42, 124), Text = Color3.fromRGB(255, 240, 248), MutedText = Color3.fromRGB(170, 120, 150) },
-	Frostbite   = { Background = Color3.fromRGB(12, 17, 20), Sidebar = Color3.fromRGB(18, 27, 33), Card = Color3.fromRGB(26, 38, 46), Accent = Color3.fromRGB(26, 188, 156), Text = Color3.fromRGB(235, 245, 245), MutedText = Color3.fromRGB(120, 150, 160) },
-	RoyalGold   = { Background = Color3.fromRGB(15, 14, 10), Sidebar = Color3.fromRGB(24, 22, 14), Card = Color3.fromRGB(36, 32, 18), Accent = Color3.fromRGB(212, 175, 55), Text = Color3.fromRGB(250, 248, 240), MutedText = Color3.fromRGB(150, 140, 110) },
-	DeepPurple  = { Background = Color3.fromRGB(12, 9, 16), Sidebar = Color3.fromRGB(20, 14, 28), Card = Color3.fromRGB(28, 18, 41), Accent = Color3.fromRGB(142, 68, 173), Text = Color3.fromRGB(245, 240, 250), MutedText = Color3.fromRGB(140, 120, 160) },
-	TokyoNight  = { Background = Color3.fromRGB(10, 12, 18), Sidebar = Color3.fromRGB(15, 19, 28), Card = Color3.fromRGB(22, 27, 41), Accent = Color3.fromRGB(0, 204, 255), Text = Color3.fromRGB(240, 244, 255), MutedText = Color3.fromRGB(130, 145, 175) },
-	Crimson     = { Background = Color3.fromRGB(14, 10, 11), Sidebar = Color3.fromRGB(24, 14, 16), Card = Color3.fromRGB(36, 18, 22), Accent = Color3.fromRGB(214, 48, 49), Text = Color3.fromRGB(255, 240, 240), MutedText = Color3.fromRGB(160, 120, 125) },
-	ToxicGreen  = { Background = Color3.fromRGB(9, 14, 10), Sidebar = Color3.fromRGB(14, 24, 15), Card = Color3.fromRGB(18, 36, 20), Accent = Color3.fromRGB(0, 255, 100), Text = Color3.fromRGB(240, 255, 240), MutedText = Color3.fromRGB(110, 150, 115) },
-	Sakura      = { Background = Color3.fromRGB(20, 15, 17), Sidebar = Color3.fromRGB(33, 22, 26), Card = Color3.fromRGB(46, 28, 35), Accent = Color3.fromRGB(255, 183, 197), Text = Color3.fromRGB(255, 245, 247), MutedText = Color3.fromRGB(180, 140, 150) }
+	DefaultDark = { Background = Color3.fromRGB(14, 15, 14), Sidebar = Color3.fromRGB(20, 22, 20), Card = Color3.fromRGB(22, 24, 25), Accent = Color3.fromRGB(46, 204, 113), Text = Color3.fromRGB(245,[...]
+	Cyberpunk   = { Background = Color3.fromRGB(12, 10, 18), Sidebar = Color3.fromRGB(21, 15, 32), Card = Color3.fromRGB(30, 20, 45), Accent = Color3.fromRGB(241, 196, 15), Text = Color3.fromRGB(255,[...]
+	Retrowave   = { Background = Color3.fromRGB(18, 11, 26), Sidebar = Color3.fromRGB(30, 14, 43), Card = Color3.fromRGB(45, 18, 64), Accent = Color3.fromRGB(255, 0, 127), Text = Color3.fromRGB(250, [...]
+	Vampire     = { Background = Color3.fromRGB(15, 10, 10), Sidebar = Color3.fromRGB(26, 14, 14), Card = Color3.fromRGB(36, 16, 16), Accent = Color3.fromRGB(192, 41, 43), Text = Color3.fromRGB(245,[...]
+	Stealth     = { Background = Color3.fromRGB(10, 10, 11), Sidebar = Color3.fromRGB(16, 16, 18), Card = Color3.fromRGB(24, 24, 27), Accent = Color3.fromRGB(110, 115, 120), Text = Color3.fromRGB(23[...]
+	OceanView   = { Background = Color3.fromRGB(10, 18, 22), Sidebar = Color3.fromRGB(14, 28, 36), Card = Color3.fromRGB(18, 40, 52), Accent = Color3.fromRGB(41, 128, 185), Text = Color3.fromRGB(240[...]
+	NeonOrange  = { Background = Color3.fromRGB(16, 14, 12), Sidebar = Color3.fromRGB(26, 21, 16), Card = Color3.fromRGB(38, 29, 20), Accent = Color3.fromRGB(230, 126, 34), Text = Color3.fromRGB(255[...]
+	Midnight    = { Background = Color3.fromRGB(8, 10, 15), Sidebar = Color3.fromRGB(12, 16, 26), Card = Color3.fromRGB(18, 24, 38), Accent = Color3.fromRGB(155, 89, 182), Text = Color3.fromRGB(240,[...]
+	HotPink     = { Background = Color3.fromRGB(18, 10, 15), Sidebar = Color3.fromRGB(30, 14, 24), Card = Color3.fromRGB(42, 16, 33), Accent = Color3.fromRGB(234, 42, 124), Text = Color3.fromRGB(255[...]
+	Frostbite   = { Background = Color3.fromRGB(12, 17, 20), Sidebar = Color3.fromRGB(18, 27, 33), Card = Color3.fromRGB(26, 38, 46), Accent = Color3.fromRGB(26, 188, 156), Text = Color3.fromRGB(235[...]
+	RoyalGold   = { Background = Color3.fromRGB(15, 14, 10), Sidebar = Color3.fromRGB(24, 22, 14), Card = Color3.fromRGB(36, 32, 18), Accent = Color3.fromRGB(212, 175, 55), Text = Color3.fromRGB(250[...]
+	DeepPurple  = { Background = Color3.fromRGB(12, 9, 16), Sidebar = Color3.fromRGB(20, 14, 28), Card = Color3.fromRGB(28, 18, 41), Accent = Color3.fromRGB(142, 68, 173), Text = Color3.fromRGB(245,[...]
+	TokyoNight  = { Background = Color3.fromRGB(10, 12, 18), Sidebar = Color3.fromRGB(15, 19, 28), Card = Color3.fromRGB(22, 27, 41), Accent = Color3.fromRGB(0, 204, 255), Text = Color3.fromRGB(240,[...]
+	Crimson     = { Background = Color3.fromRGB(14, 10, 11), Sidebar = Color3.fromRGB(24, 14, 16), Card = Color3.fromRGB(36, 18, 22), Accent = Color3.fromRGB(214, 48, 49), Text = Color3.fromRGB(255,[...]
+	ToxicGreen  = { Background = Color3.fromRGB(9, 14, 10), Sidebar = Color3.fromRGB(14, 24, 15), Card = Color3.fromRGB(18, 36, 20), Accent = Color3.fromRGB(0, 255, 100), Text = Color3.fromRGB(240, [...]
+	Sakura      = { Background = Color3.fromRGB(20, 15, 17), Sidebar = Color3.fromRGB(33, 22, 26), Card = Color3.fromRGB(46, 28, 35), Accent = Color3.fromRGB(255, 183, 197), Text = Color3.fromRGB(25[...]
 }
 
 local CurrentTheme = ClientConfig.Theme
@@ -226,15 +227,27 @@ Instance.new("UICorner", SearchBox).CornerRadius = UDim.new(0, 10)
 
 local WindowControls = Instance.new("Frame")
 WindowControls.Name = "WindowControls"
-WindowControls.Size = UDim2.new(0, 80, 0, 30)
-WindowControls.Position = UDim2.new(1, -104, 0.5, -15)
+WindowControls.Size = UDim2.new(0, 170, 0, 30)
+WindowControls.Position = UDim2.new(1, -194, 0.5, -15)
 WindowControls.BackgroundTransparency = 1
 WindowControls.Parent = TopBar
+
+local RejoinButton = Instance.new("TextButton")
+RejoinButton.Name = "RejoinBtn"
+RejoinButton.Text = "↻"
+RejoinButton.Size = UDim2.new(0, 30, 0, 30)
+RejoinButton.BackgroundColor3 = Color3.fromRGB(100, 120, 200)
+RejoinButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+RejoinButton.Font = Enum.Font.GothamBold
+RejoinButton.TextSize = 18
+RejoinButton.Parent = WindowControls
+Instance.new("UICorner", RejoinButton).CornerRadius = UDim.new(0, 8)
 
 local MinimizeButton = Instance.new("TextButton")
 MinimizeButton.Name = "MinBtn"
 MinimizeButton.Text = "—"
 MinimizeButton.Size = UDim2.new(0, 30, 0, 30)
+MinimizeButton.Position = UDim2.new(0, 40, 0, 0)
 MinimizeButton.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
 MinimizeButton.TextColor3 = Color3.fromRGB(200, 200, 200)
 MinimizeButton.Font = Enum.Font.GothamBold
@@ -246,7 +259,7 @@ local CloseButton = Instance.new("TextButton")
 CloseButton.Name = "CloseBtn"
 CloseButton.Text = "X"
 CloseButton.Size = UDim2.new(0, 30, 0, 30)
-CloseButton.Position = UDim2.new(1, -30, 0, 0)
+CloseButton.Position = UDim2.new(0, 80, 0, 0)
 CloseButton.BackgroundColor3 = Color3.fromRGB(192, 57, 43)
 CloseButton.TextColor3 = Color3.fromRGB(255, 255, 255)
 CloseButton.Font = Enum.Font.GothamBold
@@ -684,6 +697,27 @@ end
 
 GridLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
 	ContentContainer.CanvasSize = UDim2.new(0, 0, 0, GridLayout.AbsoluteContentSize.Y + 20)
+end)
+
+-- =============================================================================
+-- REJOIN FUNCTIONALITY
+-- =============================================================================
+local function RejoinGame()
+	task.wait(1)
+	local success, result = pcall(function()
+		TeleportService:TeleportAsync(game.PlaceId, {LocalPlayer})
+	end)
+	if not success then
+		SendNotificationToast("Failed to rejoin server. Try again later.")
+		warn("Rejoin failed: " .. tostring(result))
+	else
+		SendNotificationToast("Rejoining server...")
+	end
+end
+
+RejoinButton.MouseButton1Click:Connect(function()
+	SendNotificationToast("Starting rejoin sequence...")
+	RejoinGame()
 end)
 
 -- =============================================================================
