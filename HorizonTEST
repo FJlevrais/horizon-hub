@@ -1,0 +1,31 @@
+local _BYTECODE = "\215"
+local _CONSTANTS = {  }
+local _REGISTERS = {}
+local _ENV = getfenv and getfenv() or _G
+local _IP = 1
+local function _FETCH()
+    if _IP > #_BYTECODE then return nil end
+    local b = string.byte(_BYTECODE, _IP) ~ 44
+    _IP = _IP + 1
+    return b
+end
+while true do
+    local inst = _FETCH()
+    if not inst or inst == 251 then break end
+    if inst == 28 then
+        local reg = _FETCH() ; local c_idx = _FETCH() + 1
+        _REGISTERS[reg] = _CONSTANTS[c_idx]
+    elif inst == 55 then
+        local reg = _FETCH() ; local c_idx = _FETCH() + 1
+        _REGISTERS[reg] = _ENV[_CONSTANTS[c_idx]]
+    elif inst == 127 then
+        local func_reg = _FETCH() ; local arg_reg = _FETCH() ; _FETCH()
+        _REGISTERS[func_reg](_REGISTERS[arg_reg])
+    elif inst == 137 then
+        local dest = _FETCH() ; local a = _FETCH() ; local b = _FETCH()
+        _REGISTERS[dest] = _REGISTERS[a] + _REGISTERS[b]
+    elif inst == 209 then
+        local dest = _FETCH() ; local a = _FETCH() ; local b = _FETCH()
+        _REGISTERS[dest] = _REGISTERS[a] - _REGISTERS[b]
+    end
+end
