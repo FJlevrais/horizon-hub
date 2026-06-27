@@ -1,4 +1,4 @@
-local _BYTECODE = "\223\192\193\206\195\192\236\192\195\206\196\195\206\196\195\206\199\195\206\199\195\206\198\195\206\198\195\206\201\195\223\192\193\236\192\193\206\200\195\155"
+local _BYTECODE = "\145\142\143\128\141\142\162\142\141\128\138\141\128\138\141\128\137\141\128\137\141\128\136\141\128\136\141\128\135\141\145\142\143\162\142\143\128\134\141\213"
 local _CONSTANTS = { "print", "Smooth aim active", 0 }
 local _REGISTERS = {}
 local _ENV = _G
@@ -6,42 +6,42 @@ local _IP = 1
 
 local function _FETCH()
     if _IP > #_BYTECODE then return nil end
-    local b = string.byte(_BYTECODE, _IP) ~ 193
+    local b = string.byte(_BYTECODE, _IP) ~ 143
     _IP = _IP + 1
-    return (b * 11) + 62
+    return (b * 7) + 52
 end
 
 while true do
     local inst = _FETCH()
-    if not inst or inst == (90 * 11) + 62 then break end
+    if not inst or inst == (90 * 7) + 52 then break end
 
-    if inst == (15 * 11) + 62 then
-        local reg = string.byte(_BYTECODE, _IP) ~ 193 ; _IP = _IP + 1
-        local c_idx = (string.byte(_BYTECODE, _IP) ~ 193) + 1 ; _IP = _IP + 1
+    if inst == (15 * 7) + 52 then
+        local reg = string.byte(_BYTECODE, _IP) ~ 143 ; _IP = _IP + 1
+        local c_idx = (string.byte(_BYTECODE, _IP) ~ 143) + 1 ; _IP = _IP + 1
         _REGISTERS[reg] = _CONSTANTS[c_idx]
 
-    elseif inst == (30 * 11) + 62 then
-        local reg = string.byte(_BYTECODE, _IP) ~ 193 ; _IP = _IP + 1
-        local c_idx = (string.byte(_BYTECODE, _IP) ~ 193) + 1 ; _IP = _IP + 1
+    elseif inst == (30 * 7) + 52 then
+        local reg = string.byte(_BYTECODE, _IP) ~ 143 ; _IP = _IP + 1
+        local c_idx = (string.byte(_BYTECODE, _IP) ~ 143) + 1 ; _IP = _IP + 1
         _REGISTERS[reg] = _ENV[_CONSTANTS[c_idx]] or shared[_CONSTANTS[c_idx]] or _G[_CONSTANTS[c_idx]]
 
-    elseif inst == (45 * 11) + 62 then
-        local func_reg = string.byte(_BYTECODE, _IP) ~ 193 ; _IP = _IP + 1
-        local arg_reg = string.byte(_BYTECODE, _IP) ~ 193 ; _IP = _IP + 1
+    elseif inst == (45 * 7) + 52 then
+        local func_reg = string.byte(_BYTECODE, _IP) ~ 143 ; _IP = _IP + 1
+        local arg_reg = string.byte(_BYTECODE, _IP) ~ 143 ; _IP = _IP + 1
         if _REGISTERS[func_reg] then
             _REGISTERS[func_reg](_REGISTERS[arg_reg])
         end
 
-    elseif inst == (60 * 11) + 62 then
-        local dest = string.byte(_BYTECODE, _IP) ~ 193 ; _IP = _IP + 1
-        local a = string.byte(_BYTECODE, _IP) ~ 193 ; _IP = _IP + 1
-        local b = string.byte(_BYTECODE, _IP) ~ 193 ; _IP = _IP + 1
+    elseif inst == (60 * 7) + 52 then
+        local dest = string.byte(_BYTECODE, _IP) ~ 143 ; _IP = _IP + 1
+        local a = string.byte(_BYTECODE, _IP) ~ 143 ; _IP = _IP + 1
+        local b = string.byte(_BYTECODE, _IP) ~ 143 ; _IP = _IP + 1
         _REGISTERS[dest] = _REGISTERS[a] + _REGISTERS[b]
 
-    elseif inst == (75 * 11) + 62 then
-        local dest = string.byte(_BYTECODE, _IP) ~ 193 ; _IP = _IP + 1
-        local a = string.byte(_BYTECODE, _IP) ~ 193 ; _IP = _IP + 1
-        local b = string.byte(_BYTECODE, _IP) ~ 193 ; _IP = _IP + 1
+    elseif inst == (75 * 7) + 52 then
+        local dest = string.byte(_BYTECODE, _IP) ~ 143 ; _IP = _IP + 1
+        local a = string.byte(_BYTECODE, _IP) ~ 143 ; _IP = _IP + 1
+        local b = string.byte(_BYTECODE, _IP) ~ 143 ; _IP = _IP + 1
         _REGISTERS[dest] = _REGISTERS[a] - _REGISTERS[b]
     end
 end
